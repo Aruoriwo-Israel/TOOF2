@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odunmolorun Osonuga Foundation</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f9fafb; /* bg-gray-50 */
+        }
+        .page-section {
+            display: none; /* Hidden by default */
+        }
+        .page-section.active {
+            display: block; /* Shown when active */
+        }
+        /* Custom styles for hero background to avoid issues with filter: brightness and background-image */
+        .hero-background {
+            background-image: url("img/OIP-3573663937.fkHbQ_MMJKI7MFL3osl1nQHaE8"); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+        }
+        .hero-background::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4); /* Overlay */
+        }
+        /* Styling for mobile menu transition */
+        .mobile-nav-menu {
+            transition: transform 0.3s ease-out;
+            transform: translateX(100%); /* Start off-screen */
+        }
+        .mobile-nav-menu.is-active {
+            transform: translateX(0); /* Slide in */
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4 px-6 md:px-12 fixed w-full z-50 rounded-b-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo and Foundation Name -->
+            <div class="flex items-center space-x-2">
+                <!--
+                    TO ADD YOUR LOGO, replace the placeholder URL below with the direct URL to your logo image.
+                    Make sure the image is square for the best fit with the "w-10 h-10" classes.
+                    You can also adjust the w- and h- classes if your logo has a different aspect ratio.
+                -->
+                <img
+                    src="/img/odunmolorun-osonuga-foundation-high-resolution-logo.png"
+                    alt="Odunmolorun Osonuga Foundation Logo"
+                    class="w-10 h-10 object-cover rounded-lg"
+                    data-page="home"
+                />
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Odunmolorun Osonuga Foundation</h1>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <button class="nav-link flex items-center text-gray-600 hover:text-blue-600 font-medium transition duration-300 p-2 rounded-lg hover:bg-gray-100" data-page="home">
+                    <span>Home</span>
+                </button>
+                <button class="nav-link flex items-center text-gray-600 hover:text-blue-600 font-medium transition duration-300 p-2 rounded-lg hover:bg-gray-100" data-page="about">
+                    <span>About Us</span>
+                </button>
+                <button class="nav-link flex items-center text-gray-600 hover:text-blue-600 font-medium transition duration-300 p-2 rounded-lg hover:bg-gray-100" data-page="howWeHelp">
+                    <span>How We Help</span>
+                </button>
+                <button class="nav-link flex items-center text-gray-600 hover:text-blue-600 font-medium transition duration-300 p-2 rounded-lg hover:bg-gray-100" data-page="ourImpact">
+                    <span>Our Impact</span>
+                </button>
+                <button class="nav-link flex items-center text-gray-600 hover:text-blue-600 font-medium transition duration-300 p-2 rounded-lg hover:bg-gray-100" data-page="partnerships">
+                    <span>Partnerships</span>
+                </button>
+                <button class="nav-link flex items-center text-gray-600 hover:text-blue-600 font-medium transition duration-300 p-2 rounded-lg hover:bg-gray-100" data-page="contact">
+                    <span>Contact</span>
+                </button>
+            </nav>
+
+            <!-- Mobile menu button (Hamburger) -->
+            <div class="flex items-center md:hidden">
+                <button id="mobileMenuToggle" class="text-gray-600 hover:text-blue-600 focus:outline-none focus:text-blue-600 transition duration-300 p-2 rounded-lg">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Donate Button -->
+            <button id="donateButton" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 text-sm md:text-base">
+                DONATE
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu (hidden by default) -->
+        <div id="mobileNavMenu" class="mobile-nav-menu fixed top-0 right-0 w-64 h-full bg-white shadow-lg md:hidden z-40 p-6 pt-20 flex flex-col space-y-4">
+            <button id="closeMobileMenu" class="absolute top-4 right-4 text-gray-600 hover:text-blue-600 focus:outline-none">
+                <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <button class="nav-link flex items-center text-gray-800 hover:text-blue-600 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 w-full" data-page="home">
+                <span>Home</span>
+            </button>
+            <button class="nav-link flex items-center text-gray-800 hover:text-blue-600 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 w-full" data-page="about">
+                <span>About Us</span>
+            </button>
+            <button class="nav-link flex items-center text-gray-800 hover:text-blue-600 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 w-full" data-page="howWeHelp">
+                <span>How We Help</span>
+            </button>
+            <button class="nav-link flex items-center text-gray-800 hover:text-blue-600 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 w-full" data-page="ourImpact">
+                <span>Our Impact</span>
+            </button>
+            <button class="nav-link flex items-center text-gray-800 hover:text-blue-600 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 w-full" data-page="partnerships">
+                <span>Partnerships</span>
+            </button>
+            <button class="nav-link flex items-center text-gray-800 hover:text-blue-600 font-medium py-2 px-3 rounded-lg hover:bg-gray-100 w-full" data-page="contact">
+                <span>Contact</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow pt-[70px] md:pt-24"> <!-- Adjusted padding-top for fixed header, responsive -->
+        <!-- Home Page -->
+        <section id="home" class="page-section active">
+            <!-- Hero Section -->
+            <div class="relative h-screen flex items-center justify-center text-center overflow-hidden hero-background px-4">
+                <div class="relative z-10 text-white max-w-4xl">
+                    <h2 class="text-3xl md:text-6xl font-bold leading-tight mb-4 md:mb-6 rounded-lg p-2 backdrop-blur-sm bg-black/30">
+                        Supporting Motherhood, Honoring a Legacy.
+                    </h2>
+                    <p class="text-base md:text-xl mb-6 md:mb-8 leading-relaxed rounded-lg p-2 backdrop-blur-sm bg-black/30">
+                        The Odunmolorun Osonuga Foundation provides financial assistance for hospital bills for women delivering on November 27th and offers support for IVF treatments.
+                    </p>
+                    <button id="homeLearnMore" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 md:py-3 md:px-8 rounded-full shadow-xl transition-all duration-300 transform hover:scale-105 text-base md:text-lg">
+                        Learn More About Our Mission
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mission Section -->
+            <div class="container mx-auto px-6 md:px-12 py-12 md:py-16">
+                <div class="flex flex-col md:flex-row items-center bg-white rounded-xl shadow-lg overflow-hidden p-6 md:p-12">
+                    <div class="md:w-1/2 md:pr-8 mb-8 md:mb-0">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4 md:mb-6">Our Mission</h3>
+                        <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+                            Established in memory of our beloved sister, wife, and daughter, Odunmolorun Osonuga, who passed away in 2024, our mission is simple yet profound: to alleviate the financial burden on new mothers and ensure they can access quality healthcare without the worry of hospital debts, and to provide support for women seeking IVF treatments.
+                        </p>
+                        <p class="text-base md:text-lg text-gray-700 leading-relaxed mt-3 md:mt-4">
+                            We aim to make a positive impact on the lives of these women and their families, bringing joy and relief, while honoring our sister's compassionate spirit.
+                        </p>
+                    </div>
+                    <div class="md:w-1/2">
+                        <img src="/img/1899299-2412069667.jpg" alt="Symbol of Support and Care" class="rounded-lg shadow-md w-full h-auto" onerror="this.onerror=null;this.src='https://placehold.co/800x600/e0e0e0/333333?text=Image+Loading+Error';" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goals and Objectives Section -->
+            <div class="bg-blue-50 py-12 md:py-16">
+                <div class="container mx-auto px-6 md:px-12">
+                    <h3 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8 md:mb-10">Our Goals & Objectives</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+                        <div class="bg-white p-6 md:p-8 rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300">
+                            <div class="flex justify-center mb-3 md:mb-4">
+                                <!-- Icon removed -->
+                            </div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3">Provide Post-Delivery Financial Assistance</h4>
+                            <p class="text-gray-600 text-sm">To provide financial assistance to women who deliver on November 27th and are unable to pay their hospital bills.</p>
+                        </div>
+                        <div class="bg-white p-6 md:p-8 rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300">
+                            <div class="flex justify-center mb-3 md:mb-4">
+                                <!-- Icon removed -->
+                            </div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3">Support IVF Treatments</h4>
+                            <p class="text-gray-600 text-sm">To offer financial and informational support to individuals and couples pursuing In Vitro Fertilization (IVF) treatments.</p>
+                        </div>
+                        <div class="bg-white p-6 md:p-8 rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300">
+                            <div class="flex justify-center mb-3 md:mb-4">
+                                <!-- Icon removed -->
+                            </div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3">Honor Sister's Memory</h4>
+                            <p class="text-gray-600 text-sm">To honor Odunmolorun Osonuga's memory by making a lasting positive impact on lives.</p>
+                        </div>
+                        <div class="bg-white p-6 md:p-8 rounded-xl shadow-md text-center transform hover:scale-105 transition duration-300">
+                            <div class="flex justify-center mb-3 md:mb-4">
+                                <!-- Icon removed -->
+                            </div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3">Raise Awareness</h4>
+                            <p class="text-gray-600 text-sm">To raise awareness about financial challenges in childbirth and fertility treatments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action Section - Donate/Get Involved -->
+            <div class="bg-blue-600 py-12 md:py-16 text-white text-center rounded-lg m-4 md:m-12 shadow-xl">
+                <div class="container mx-auto px-6 md:px-12">
+                    <h3 class="text-2xl md:text-4xl font-bold mb-4 md:mb-6">Make a Difference Today!</h3>
+                    <p class="text-base md:text-xl mb-6 md:mb-8 max-w-3xl mx-auto">
+                        Your support can bring joy and relief to many women and their families. Join us in honoring a legacy of compassion.
+                    </p>
+                    <button id="homeSupportCause" class="bg-white text-blue-600 font-semibold py-2 px-6 md:py-3 md:px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 text-base md:text-lg hover:bg-gray-100">
+                        Support Our Cause
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Us Page -->
+        <section id="about" class="page-section">
+            <div class="container mx-auto px-6 md:px-12 py-12 md:py-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8 text-center">About The Odunmolorun Osonuga Foundation</h2>
+
+                <!-- Executive Summary -->
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 md:mb-10">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4">Executive Summary</h3>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+                        The Odunmolorun Osonuga Foundation is a non-profit organization established in memory of our beloved sister, wife, and daughter, Odunmolorun Osonuga, who passed away in 2024. Our mission is to provide financial assistance to women who deliver on November 27th and are unable to pay their hospital bills, and to offer support for In Vitro Fertilization (IVF) treatments. We aim to make a positive impact on the lives of these women and their families, while honoring our sister's memory.
+                    </p>
+                </div>
+
+                <!-- Introduction -->
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 md:mb-10">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4">Introduction</h3>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+                        The Odunmolorun Osonuga Foundation is a response to the growing need for financial assistance among women facing childbirth costs and those pursuing fertility treatments. Our foundation aims to bridge the gap between these women and the financial resources they need to access quality healthcare and achieve their dreams of parenthood.
+                    </p>
+                </div>
+
+                <!-- Goals and Objectives -->
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4">Goals and Objectives</h3>
+                    <ul class="list-disc list-inside text-base md:text-lg text-gray-700 space-y-2 md:space-y-3">
+                        <li><strong>Provide Post-Delivery Financial Assistance:</strong> To provide financial assistance to women who deliver on November 27th and are unable to pay their hospital bills.</li>
+                        <li><strong>Support IVF Treatments:</strong> To offer financial and informational support to individuals and couples pursuing In Vitro Fertilization (IVF) treatments.</li>
+                        <li><strong>Support Women in Need:</strong> To support women who are facing financial difficulties due to childbirth or fertility challenges, and to help them access necessary medical care.</li>
+                        <li><strong>Honor Our Sister's Memory:</strong> To honor our sister's memory by making a positive impact on the lives of women and their families.</li>
+                        <li><strong>Raise Awareness:</strong> To raise awareness about the challenges faced by women regarding childbirth costs and the financial burden of fertility treatments.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- How We Help Page -->
+        <section id="howWeHelp" class="page-section">
+            <div class="container mx-auto px-6 md:px-12 py-12 md:py-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8 text-center">How We Help: Our Methodology</h2>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 md:mb-10">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4">Our Approach to Post-Delivery Financial Assistance</h3>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6">
+                        For women delivering on November 27th who are unable to pay their hospital bills, our process is designed to be efficient, empathetic, and impactful.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                        <div class="bg-blue-50 p-6 md:p-8 rounded-xl shadow-md text-center">
+                            <div class="text-blue-600 text-4xl md:text-5xl font-extrabold mb-3 md:mb-4">01</div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3">Identification of Beneficiaries</h4>
+                            <p class="text-gray-700 text-sm">We will work closely with hospitals and healthcare providers to identify women who deliver on November 27th and are genuinely unable to pay their hospital bills. This collaborative approach ensures we reach those most in need.</p>
+                        </div>
+                        <div class="bg-blue-50 p-6 md:p-8 rounded-xl shadow-md text-center">
+                            <div class="text-blue-600 text-4xl md:text-5xl font-extrabold mb-3 md:mb-4">02</div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3">Application & Selection Process</h4>
+                            <p class="text-gray-700 text-sm">A clear application and selection process will be established. This process will ensure transparency and fairness, helping us verify the financial need of potential beneficiaries.</p>
+                        </div>
+                        <div class="bg-blue-50 p-6 md:p-8 rounded-xl shadow-md text-center">
+                            <div class="text-blue-600 text-4xl md:text-5xl font-extrabold mb-3 md:mb-4">03</div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3">Provision of Financial Assistance</h4>
+                            <p class="text-gray-700 text-sm">Once selected, we will directly provide financial assistance to the beneficiaries, helping them settle their hospital debts and alleviate a significant burden during a crucial time.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 md:mb-10">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4">Our Approach to IVF Assistance</h3>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6">
+                        For individuals and couples seeking In Vitro Fertilization (IVF) treatments, we aim to provide crucial support to help them achieve their dreams of starting a family.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                        <div class="bg-blue-50 p-6 md:p-8 rounded-xl shadow-md text-center">
+                            <div class="text-blue-600 text-4xl md:text-5xl font-extrabold mb-3 md:mb-4">01</div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3">Information & Guidance</h4>
+                            <p class="text-gray-700 text-sm">We provide resources and guidance on understanding IVF procedures, clinics, and the overall journey, empowering individuals with knowledge.</p>
+                        </div>
+                        <div class="bg-blue-50 p-6 md:p-8 rounded-xl shadow-md text-center">
+                            <div class="text-blue-600 text-4xl md:text-5xl font-extrabold mb-3 md:mb-4">02</div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3">Financial Support Assessment</h4>
+                            <p class="text-gray-700 text-sm">Through a compassionate and confidential assessment, we determine eligibility for financial assistance towards IVF treatment costs.</p>
+                        </div>
+                        <div class="bg-blue-50 p-6 md:p-8 rounded-xl shadow-md text-center">
+                            <div class="text-blue-600 text-4xl md:text-5xl font-extrabold mb-3 md:mb-4">03</div>
+                            <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-2 md:mb-3">Connecting & Assisting</h4>
+                            <p class="text-gray-700 text-sm">We connect beneficiaries with reputable fertility clinics and provide direct financial aid to cover a portion of their IVF expenses, easing the financial burden.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8 md:mt-12">
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-3 md:mb-4">Our Commitment</h3>
+                    <p class="text-base md:text-lg text-gray-700 max-w-3xl mx-auto">
+                        Every step of our methodology is guided by our commitment to making a tangible, positive impact on the lives of mothers and families, reflecting the spirit of compassion that inspired our foundation.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Impact Page -->
+        <section id="ourImpact" class="page-section">
+            <div class="container mx-auto px-6 md:px-12 py-12 md:py-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8 text-center">Our Impact & Accountability</h2>
+
+                <!-- Budget Overview -->
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 md:mb-10 text-center">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4">Our Commitment: Financial Assistance</h3>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-3 md:mb-4">
+                        Our foundation operates with a dedicated budget to support both post-delivery hospital bill assistance and IVF treatment support.
+                    </p>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed">
+                        Through this funding, we aim to provide crucial financial assistance to women who deliver on November 27th and are unable to pay their hospital bills, and to extend support to individuals pursuing IVF.
+                    </p>
+                </div>
+
+                <!-- Timeline -->
+                <div class="bg-blue-50 rounded-xl shadow-lg p-6 md:p-8 mb-8 md:mb-10">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4 text-center">Timeline for Launch & Assistance</h3>
+                    <div class="flex flex-col md:flex-row justify-around items-center space-y-4 md:space-y-0 md:space-x-8">
+                        <div class="text-center">
+                            <div class="text-blue-600 text-5xl md:text-6xl mb-2">🗓️</div>
+                            <p class="text-lg md:text-xl font-semibold text-gray-800">Foundation Launch</p>
+                            <p class="text-base md:text-lg text-gray-700">[Date to be announced]</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-green-600 text-5xl md:text-6xl mb-2">💰</div>
+                            <p class="text-lg md:text-xl font-semibold text-gray-800">Start Providing Financial Assistance</p>
+                            <p class="text-base md:text-lg text-gray-700">[Date to be announced]</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Monitoring and Evaluation -->
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4">Monitoring and Evaluation</h3>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-3 md:mb-4">
+                        We are committed to transparency and accountability. We will establish a robust monitoring and evaluation system to track our progress and assess our impact effectively across all our programs.
+                    </p>
+                    <ul class="list-disc list-inside text-base md:text-lg text-gray-700 space-y-2">
+                        <li>Regular reports on funds disbursed and beneficiaries assisted for both post-delivery and IVF support.</li>
+                        <li>Surveys and feedback from beneficiaries to understand the impact of our assistance.</li>
+                        <li>Assessments to measure the overall effectiveness of our programs.</li>
+                    </ul>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed mt-3 md:mt-4">
+                        This system will ensure that our resources are utilized efficiently and that we continuously learn and improve to maximize our positive impact.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partnerships Page -->
+        <section id="partnerships" class="page-section">
+            <div class="container mx-auto px-6 md:px-12 py-12 md:py-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8 text-center">Partnerships</h2>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 md:mb-10">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4">Collaborating for Greater Impact</h3>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6">
+                        The success of the Odunmolorun Osonuga Foundation hinges on strong collaborations. We believe that by working together with like-minded organizations, we can amplify our efforts and reach more women in need.
+                    </p>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6">
+                        We actively seek to partner with:
+                    </p>
+                    <ul class="list-disc list-inside text-base md:text-lg text-gray-700 space-y-2 mb-6 md:mb-8">
+                        <li><strong>Hospitals & Healthcare Providers:</strong> To facilitate the identification of beneficiaries for post-delivery assistance and streamline the payment process for hospital bills.</li>
+                        <li><strong>Fertility Clinics & Specialists:</strong> To collaborate on providing IVF assistance, ensuring access to quality care and support for individuals pursuing fertility treatments.</li>
+                        <li><strong>Other Non-Profit Organizations:</strong> To share resources, knowledge, and expand our reach through joint initiatives across all our programs.</li>
+                    </ul>
+
+                    <div class="text-center mt-6 md:mt-8">
+                        <h4 class="text-lg md:text-xl font-semibold text-gray-800 mb-3 md:mb-4">Are you interested in partnering with us?</h4>
+                        <p class="text-base md:text-lg text-gray-700 mb-4 md:mb-6">
+                            If your organization shares our vision of supporting women in need and honoring a legacy of compassion, we would love to hear from you.
+                        </p>
+                        <button id="partnershipsContact" class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-6 md:py-3 md:px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 text-base md:text-lg">
+                            Contact Us to Partner
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Placeholder for Partner Logos/Testimonials (if applicable) -
+            </div>
+        </section>
+
+        <!-- Contact Page -->
+        <section id="contact" class="page-section">
+            <div class="container mx-auto px-6 md:px-12 py-12 md:py-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 md:mb-8 text-center">Contact Us</h2>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 mb-8 md:mb-10">
+                    <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4">Get in Touch</h3>
+                    <p class="text-base md:text-lg text-gray-700 leading-relaxed mb-4 md:mb-6">
+                        We'd love to hear from you! Whether you have a question, want to explore a partnership, or are looking to make a donation, please reach out to us using the form below or our contact details.
+                    </p>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+                        <!-- Contact Form -->
+                        <div>
+                            <form class="space-y-4 md:space-y-6">
+                                <div>
+                                    <label for="name" class="block text-gray-700 text-sm font-bold mb-1 md:mb-2">
+                                        Your Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        class="shadow appearance-none border rounded-lg w-full py-2 px-3 md:py-3 md:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                        placeholder="John Doe"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-gray-700 text-sm font-bold mb-1 md:mb-2">
+                                        Your Email
+                                    </label>
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        class="shadow appearance-none border rounded-lg w-full py-2 px-3 md:py-3 md:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                        placeholder="john.doe@example.com"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label for="subject" class="block text-gray-700 text-sm font-bold mb-1 md:mb-2">
+                                        Subject
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="subject"
+                                        class="shadow appearance-none border rounded-lg w-full py-2 px-3 md:py-3 md:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                        placeholder="Inquiry about partnership"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label for="message" class="block text-gray-700 text-sm font-bold mb-1 md:mb-2">
+                                        Message
+                                    </label>
+                                    <textarea
+                                        id="message"
+                                        rows="4"
+                                        class="shadow appearance-none border rounded-lg w-full py-2 px-3 md:py-3 md:px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                        placeholder="Your message here..."
+                                        required
+                                    ></textarea>
+                                </div>
+                                <button
+                                    type="submit"
+                                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 md:py-3 md:px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 text-base md:text-lg"
+                                >
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Contact Details -->
+                        <div>
+                            <h3 class="text-xl md:text-2xl font-semibold text-gray-800 mb-3 md:mb-4">Our Details</h3>
+                            <div class="space-y-3 md:space-y-4 text-gray-700 text-base md:text-lg">
+                                <p class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail mr-2 md:mr-3 text-blue-600"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                    <span>Email: info@odunmolorunfoundation.org (placeholder)</span>
+                                </p>
+                                <p class="flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone mr-2 md:mr-3 text-blue-600"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-3.67-3.67A19.79 19.79 0 0 1 2 6.18 2 2 0 0 1 4.18 4h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    <span>Phone: +234 800 123 4567 (placeholder)</span>
+                                </p>
+                                <p class="flex items-start">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin mr-2 md:mr-3 text-blue-600 mt-1"><path d="M12 18.2V22M9 22h6M12 12c-3.314 0-6-2.686-6-6s2.686-6 6-6 6 2.686 6 6-2.686 6-6 6z"/><circle cx="12" cy="6" r="2"/></svg>
+                                    <span>Address: [Your Foundation Address Here], Nigeria</span>
+                                </p>
+                            </div>
+
+                            <div class="mt-6 md:mt-8">
+                                <h4 class="text-xl font-semibold text-gray-800 mb-3">Bank Account Details for Donations</h4>
+                                <p class="text-base md:text-lg text-gray-700">
+                                    To make a direct donation, please use the following bank details. Your generous contribution makes a direct impact.
+                                </p>
+                                <div class="bg-blue-50 rounded-lg p-4 md:p-6 mt-3 md:mt-4 shadow-inner">
+                                    <p class="font-mono text-gray-800 text-base md:text-lg mb-1 md:mb-2">Bank Name: [Your Bank Name]</p>
+                                    <p class="font-mono text-gray-800 text-base md:text-lg mb-1 md:mb-2">Account Name: Odunmolorun Osonuga Foundation</p>
+                                    <p class="font-mono text-gray-800 text-base md:text-lg">Account Number: [Your Account Number]</p>
+                                </div>
+                                <p class="text-xs md:text-sm text-gray-600 mt-3 md:mt-4">
+                                    For international transfers or other donation methods, please contact us.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-6 md:py-8 mt-8 md:mt-12 rounded-t-lg">
+        <div class="container mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <!-- About -->
+            <div>
+                <h3 class="text-white text-base md:text-lg font-semibold mb-3 md:mb-4">About Us</h3>
+                <p class="text-xs md:text-sm">
+                    The Odunmolorun Osonuga Foundation is dedicated to providing financial assistance to women who deliver on November 27th and are unable to pay their hospital bills, and to offer support for IVF treatments, honoring a cherished memory.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-white text-base md:text-lg font-semibold mb-3 md:mb-4">Quick Links</h3>
+                <ul class="space-y-1 md:space-y-2 text-xs md:text-sm">
+                    <li><a href="#" class="hover:text-blue-400 transition duration-300">Our Mission</a></li>
+                    <li><a href="#" class="hover:text-blue-400 transition duration-300">How We Help</a></li>
+                    <li><a href="#" class="hover:text-blue-400 transition duration-300">Impact Stories</a></li>
+                    <li><a href="#" class="hover:text-blue-400 transition duration-300">Partnerships</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact Info -->
+            <div>
+                <h3 class="text-white text-base md:text-lg font-semibold mb-3 md:mb-4">Contact Us</h3>
+                <p class="text-xs md:text-sm">
+                    Email: info@odunmolorunfoundation.org (placeholder) <br />
+                    Phone: +234 800 123 4567 (placeholder) <br />
+                    Address: [Your Foundation Address Here]
+                </p>
+                <div class="flex space-x-3 md:space-x-4 mt-3 md:mt-4">
+                    <!-- Social Media Icons - Placeholders -->
+                    <a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">
+                        <!-- SVG for Facebook -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path d="M14 13.5h2.4l.6-3h-3v-1.5c0-.8.3-1.4 1.5-1.4h1.5V6.1c-.3 0-1.2-.1-2.4-.1-2.5 0-4.2 1.5-4.2 4.3v2.5h-3v3h3V22c.9 0 2 0 3 0V13.5z" />
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">
+                        <!-- SVG for Twitter/X -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path d="M22.46 6c-.7.3-1.5.5-2.3.6.8-.5 1.4-1.2 1.7-2.1-.8.5-1.7.9-2.7 1.1-.7-.8-1.7-1.3-2.9-1.3-2.2 0-4 1.8-4 4 0 .3 0 .6.1.9-3.3-.2-6.2-1.7-8.1-4-.3.5-.4 1-.4 1.6 0 1.4.7 2.6 1.8 3.3-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.6 3.2 4-.3.1-.7.1-1.1.1-.3 0-.6 0-.8-.1.5 1.7 2 3 3.8 3.1-1.4 1.1-3.2 1.8-5.2 1.8-.3 0-.7 0-1 0C4.3 20.4 6.6 21 9 21c10.2 0 15.7-8.5 15.7-15.7v-.7c.8-.6 1.5-1.4 2-2.3z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-300 hover:text-blue-400 transition duration-300">
+                        <!-- SVG for Instagram -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                            <path d="M12 2.16c3.2 0 3.59 0 4.85.07 1.25.07 1.93.26 2.41.45.64.25 1.14.59 1.65 1.09.5.5.84 1 1.09 1.65.19.48.38 1.16.45 2.41.07 1.26.07 1.65.07 4.85s0 3.59-.07 4.85c-.07 1.25-.26 1.93-.45 2.41-.25.64-.59 1.14-1.09 1.65-.5.5-1 .84-1.65 1.09-.48.19-1.16.38-2.41.45-1.26.07-1.65.07-4.85.07s-3.59 0-4.85-.07c-1.25-.07-1.93-.26-2.41-.45-.64-.25-1.14-.59-1.65-1.09-.5-.5-.84-1-1.09-1.65-.19-.48-.38-1.16-.45-2.41-.07-1.26-.07-1.65-.07-4.85s0-3.59.07-4.85c.07-1.25.26-1.93.45-2.41.25-.64.59-1.14 1.09-1.65.5-.5 1-.84 1.65-1.09.48-.19 1.16-.38 2.41-.45C8.41 2.16 8.79 2.16 12 2.16zm0-2.16c-3.26 0-3.67 0-4.94.07C6.83.13 6.07.33 5.42.59 4.7.87 4.14 1.24 3.57 1.81c-.57.57-.94 1.13-1.22 1.78-.26.65-.46 1.41-.53 2.68C.07 8.33.07 8.74.07 12s0 3.67.07 4.94c.07 1.27.27 2.03.53 2.68.28.65.65 1.21 1.22 1.78.57.57 1.13.94 1.78 1.22.65.26 1.41.46 2.68.53C8.33 23.93 8.74 23.93 12 23.93s3.67 0 4.94-.07c1.27-.07 2.03-.27 2.68-.53.65-.28 1.21-.65 1.78-1.22.57-.57.94-1.13 1.22-1.78-.65-.26-1.41-.46-2.68-.53C15.67.07 15.26.07 12 .07z"/>
+                            <path d="M12 5.86a6.14 6.14 0 1 0 0 12.28 6.14 6.14 0 0 0 0-12.28zm0 10.14a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM18.04 6.51a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-gray-500 text-xs md:text-sm mt-6 md:mt-8 pt-3 md:pt-4 border-t border-gray-700 mx-auto w-11/12">
+            &copy; <span id="currentYear"></span> Odunmolorun Osonuga Foundation. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageSections = document.querySelectorAll('.page-section');
+            const donateButton = document.getElementById('donateButton');
+            const homeLearnMoreButton = document.getElementById('homeLearnMore');
+            const homeSupportCauseButton = document.getElementById('homeSupportCause');
+            const partnershipsContactButton = document.getElementById('partnershipsContact');
+
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileNavMenu = document.getElementById('mobileNavMenu');
+            const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Function to navigate between pages
+            const navigateTo = (pageId) => {
+                pageSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(pageId).classList.add('active');
+                // Close mobile menu if open
+                if (mobileNavMenu.classList.contains('is-active')) {
+                    mobileNavMenu.classList.remove('is-active');
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top on page change
+            };
+
+            // Event listeners for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    const page = event.currentTarget.dataset.page;
+                    navigateTo(page);
+                });
+            });
+
+            // Event listeners for specific buttons
+            if (donateButton) {
+                donateButton.addEventListener('click', () => navigateTo('contact'));
+            }
+            if (homeLearnMoreButton) {
+                homeLearnMoreButton.addEventListener('click', () => navigateTo('howWeHelp'));
+            }
+            if (homeSupportCauseButton) {
+                homeSupportCauseButton.addEventListener('click', () => navigateTo('contact'));
+            }
+            if (partnershipsContactButton) {
+                partnershipsContactButton.addEventListener('click', () => navigateTo('contact'));
+            }
+
+            // Mobile menu toggle logic
+            if (mobileMenuToggle && mobileNavMenu && closeMobileMenu) {
+                mobileMenuToggle.addEventListener('click', () => {
+                    mobileNavMenu.classList.add('is-active');
+                });
+
+                closeMobileMenu.addEventListener('click', () => {
+                    mobileNavMenu.classList.remove('is-active');
+                });
+
+                // Close mobile menu if a nav link inside it is clicked
+                mobileNavMenu.querySelectorAll('.nav-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileNavMenu.classList.remove('is-active');
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
